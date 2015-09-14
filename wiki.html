@@ -9,17 +9,18 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 		<script type="text/javascript" src="js/navbar.js"></script>
+		<script type="text/javascript" src="js/wiki.js"></script>
 	</head>
 	<header>
 		<div id="navbar-container">
 		
 		</div>
 	</header>
-	<body>
-		<div class="container">
+	<body ng-app="CsApp" ng-controller="CsController">
+		<div class="container" ng-hide="error">
 			<div class="jumbotron">
-			  <h1>CompactStorage</h1>
-			  <p>is a mod that allows you to compact your storage solutions!</p>
+			  <h1>{{item.name}}</h1>
+			  <p>{{item.description}}</p>
 			  <p>
 			  	<a class="btn btn-primary btn-lg" href="#" role="button">Downloads</a>
 			  	<a class="btn btn-info btn-lg" href="#" role="button">Learn More</a>
@@ -29,6 +30,13 @@
 				<h3>Learn more</h3>
 				<p>CompactStorage is a mod that allows you to customise chests and backpacks. In <strong>3.0</strong> you can customise chests and backpacks on the fly, by changing tabs. In <strong>1.9, 2.0 and 2.1</strong> you have to make a new chest everytime in the <a href="#">Builder</a>.</p>
 			</div>
+		</div>
+		<div class="container" ng-show="error">
+			<a href="index.html"><div class="alert alert-danger" role="alert">
+			  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			  <span class="sr-only">Error:</span>
+			  Return to homepage
+			</div></a>
 		</div>
 	</body>
 </html>
