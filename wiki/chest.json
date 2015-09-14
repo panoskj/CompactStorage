@@ -1,0 +1,14 @@
+{
+	"name": "Chest",
+	"description": "Description...",
+	"image": "http://media-curse.cursecdn.com/attachments/125/394/aa73f1d3fbafb3653844fa9c2c915ac8.png",
+	"meta": {
+		"id": "compactstorage:compactChest",
+		"max-size": {
+			"x": 24,
+			"y": 12
+		},
+		"mod": "CompactStorage",
+		"version": "1.0"
+	}
+}
