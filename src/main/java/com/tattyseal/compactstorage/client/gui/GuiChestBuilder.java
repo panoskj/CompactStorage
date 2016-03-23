@@ -1,8 +1,10 @@
 package com.tattyseal.compactstorage.client.gui;
 
 import com.tattyseal.compactstorage.CompactStorage;
+import com.tattyseal.compactstorage.client.render.TileEntityChestRenderer;
 import com.tattyseal.compactstorage.network.packet.C01PacketUpdateBuilder;
 import com.tattyseal.compactstorage.network.packet.C02PacketCraftChest;
+import com.tattyseal.compactstorage.tileentity.TileEntityChest;
 import com.tattyseal.compactstorage.tileentity.TileEntityChestBuilder;
 import com.tattyseal.compactstorage.util.RenderUtil;
 import com.tattyseal.compactstorage.util.StorageInfo;
@@ -14,9 +16,13 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -26,6 +32,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +58,8 @@ public class GuiChestBuilder extends GuiContainer
     public GuiTextField colorField;
     
     public TileEntityChestBuilder builder;
+    public TileEntityChestRenderer render;
+    public TileEntityChest dummy;
 
     public static final int[] allowed = new int[]
     {
@@ -87,6 +96,10 @@ public class GuiChestBuilder extends GuiContainer
 
         this.xSize = 7 + 162 + 7;
         this.ySize = 7 + 108 + 13 + 54 + 4 + 18 + 7;
+
+        render = new TileEntityChestRenderer();
+        dummy = new TileEntityChest();
+        dummy.color = 0xFF0000;
     }
     
     @Override
@@ -185,7 +198,6 @@ public class GuiChestBuilder extends GuiContainer
     @Override
     public void drawGuiContainerForegroundLayer(int arg0, int arg1) 
     {
-    	
     }
     
     @Override
@@ -226,6 +238,24 @@ public class GuiChestBuilder extends GuiContainer
                 }
             }
     	}
+
+        float roll = 0;
+        float yaw = 45;
+
+        GL11.glPushMatrix();
+        GL11.glTranslatef(guiLeft + 90, guiTop + 100, 100);
+        GL11.glScalef(-30, 30, 30);
+
+        RenderHelper.enableGUIStandardItemLighting();
+        GL11.glRotatef(180, 0, 0.25f, 1);
+        GL11.glRotatef(roll, 1, 0, 0);
+        GL11.glRotatef(yaw, 0, 1, 0);
+
+        EntityFallingBlock item = new EntityFallingBlock(world, 0, 0, 0, Blocks.chest.getDefaultState());//CompactStorage.chestBuilder.getDefaultState());
+
+        render.renderTileEntityAt(dummy, 0, 0, 0, 1, 0);
+        mc.getRenderManager().renderEntityWithPosYaw(item, 0, 0, 0, 0, 0);
+        GL11.glPopMatrix();
     }
     
     @Override
@@ -287,7 +317,7 @@ public class GuiChestBuilder extends GuiContainer
         
     	drawTexturedModalRect(guiLeft, guiTop, 0, 0, 7, 7);
 
-    	RenderUtil.renderBackground(this, guiLeft, guiTop, 162, 14 + 15 + 15 + 18 + 36);
+    	RenderUtil.renderBackground(Color.white, this, guiLeft, guiTop, 162, 14 + 15 + 15 + 18 + 36);
 
         int slotX = guiLeft + (xSize / 2) - ((9 * 18) / 2);
         int slotY = guiTop + 7 + 108 + 13;

@@ -58,7 +58,7 @@ public class CompactStorage
     
     public static final String ID = "compactstorage";
     public static final String NAME = "CompactStorage";
-    public static final String VERSION = "v2.0.0a";
+    public static final String VERSION = "2.1";
 
     public static final String CLIENT_PROXY = "com.tattyseal.compactstorage.proxy.ClientProxy";
     public static final String SERVER_PROXY = "com.tattyseal.compactstorage.proxy.ServerProxy";
