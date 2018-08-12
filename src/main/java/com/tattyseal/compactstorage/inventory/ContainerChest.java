@@ -209,5 +209,9 @@ public class ContainerChest extends Container
         return super.slotClick(slot, button, flag, player);
     }
 
-
+	
+    public boolean placeItemStack(ItemStack stack)
+    {
+        return mergeItemStack(stack, 0, lastId, false);
+    }
 }
