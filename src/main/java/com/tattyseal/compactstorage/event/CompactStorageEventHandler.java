@@ -6,6 +6,7 @@ import com.tattyseal.compactstorage.block.BlockBarrel;
 import com.tattyseal.compactstorage.block.BlockChest;
 import com.tattyseal.compactstorage.inventory.ContainerChest;
 import com.tattyseal.compactstorage.inventory.InventoryBackpack;
+import com.tattyseal.compactstorage.util.LogHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -201,11 +202,11 @@ public class CompactStorageEventHandler
 			modifiersField.setInt(fMouseX, fMouseX.getModifiers() & ~java.lang.reflect.Modifier.FINAL);
 			modifiersField.setInt(fMouseY, fMouseY.getModifiers() & ~java.lang.reflect.Modifier.FINAL);
 			
-			System.out.println("Reflection on GuiScreenEvent.DrawScreenEvent mouseX and mouseY succeeded!");
+			LogHelper.dump("Reflection on GuiScreenEvent.DrawScreenEvent mouseX and mouseY succeeded!");
 		}
 		catch(java.lang.Exception e)
 		{
-			System.out.println("Reflection on GuiScreenEvent.DrawScreenEvent mouseX and mouseY failed! Reason: " + e);
+			LogHelper.dump("Reflection on GuiScreenEvent.DrawScreenEvent mouseX and mouseY failed! Reason: " + e);
 		}
 	}
 	
@@ -220,7 +221,7 @@ public class CompactStorageEventHandler
 			}
 			catch(java.lang.Exception e)
 			{
-				System.out.println("Call to scaleEventMousePos failed! This should never happen! Reason: " + e);
+				LogHelper.dump("Call to scaleEventMousePos failed! This should never happen! Reason: " + e);
 			}
 		}
 	}
