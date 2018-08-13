@@ -12,10 +12,8 @@ import com.tattyseal.compactstorage.event.CompactStorageEventHandler;
 import com.tattyseal.compactstorage.event.ConnectionHandler;
 import com.tattyseal.compactstorage.item.ItemBackpack;
 import com.tattyseal.compactstorage.item.ItemBlockChest;
-import com.tattyseal.compactstorage.network.handler.C01HandlerUpdateBuilder;
-import com.tattyseal.compactstorage.network.handler.C02HandlerCraftChest;
-import com.tattyseal.compactstorage.network.packet.C01PacketUpdateBuilder;
-import com.tattyseal.compactstorage.network.packet.C02PacketCraftChest;
+import com.tattyseal.compactstorage.network.handler.*;
+import com.tattyseal.compactstorage.network.packet.*;
 import com.tattyseal.compactstorage.proxy.IProxy;
 import com.tattyseal.compactstorage.tileentity.TileEntityBarrel;
 import com.tattyseal.compactstorage.tileentity.TileEntityBarrelFluid;
@@ -175,6 +173,7 @@ public class CompactStorage
         wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(CompactStorage.ID);
         wrapper.registerMessage(C01HandlerUpdateBuilder.class, C01PacketUpdateBuilder.class, 0, Side.SERVER);
         wrapper.registerMessage(C02HandlerCraftChest.class, C02PacketCraftChest.class, 1, Side.SERVER);
+        wrapper.registerMessage(C03HandlerUpdateConfig.class, C03PacketUpdateConfig.class, 2, Side.CLIENT);
 
         ConfigurationHandler.configFile = event.getSuggestedConfigurationFile();
 
@@ -192,6 +191,7 @@ public class CompactStorage
     {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
         MinecraftForge.EVENT_BUS.register(new CompactStorageEventHandler());
+        MinecraftForge.EVENT_BUS.register(new ConfigurationHandler.EventHandler());
 
         GameRegistry.addShapedRecipe(new ResourceLocation("compactstorage", "chest_builder"), null, new ItemStack(ModBlocks.chestBuilder, 1), "ILI", "ICI", "ILI", 'I', new ItemStack(Items.IRON_INGOT, 1), 'C', new ItemStack(Blocks.CHEST, 1), 'L', new ItemStack(Blocks.LEVER, 1));
         GameRegistry.addShapedRecipe(new ResourceLocation("compactstorage", "barrel"), null, new ItemStack(ModBlocks.barrel, 1), "III", "GCG", "III", 'I', new ItemStack(Items.IRON_INGOT, 1), 'G', new ItemStack(Blocks.IRON_BLOCK, 1), 'C', new ItemStack(Blocks.CHEST, 1));

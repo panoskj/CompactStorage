@@ -21,6 +21,8 @@ public class GuiCompactStorageConfig extends GuiConfig
         elementList = new ArrayList<IConfigElement>();
         elementList.add(new ConfigElement(ConfigurationHandler.configuration.getCategory("internal")));
         elementList.add(new ConfigElement(ConfigurationHandler.configuration.getCategory("builder")));
+        elementList.add(new ConfigElement(ConfigurationHandler.configuration.getCategory("chest")));
+        elementList.add(new ConfigElement(ConfigurationHandler.configuration.getCategory("barrel/drum")));
     }
 
     public GuiCompactStorageConfig(GuiScreen parentScreen, String modid, String title)
