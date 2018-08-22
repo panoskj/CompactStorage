@@ -246,4 +246,11 @@ public class CompactStorage
 
         return 0xFFFFFF;
     }
+
+    public static boolean isIntegratedServer()
+    {
+        net.minecraft.server.MinecraftServer server = net.minecraftforge.fml.common.FMLCommonHandler.instance().getMinecraftServerInstance();
+        
+        return server != null && !server.isDedicatedServer();
+    }
 }
