@@ -173,7 +173,7 @@ public class CompactStorage
         wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(CompactStorage.ID);
         wrapper.registerMessage(C01HandlerUpdateBuilder.class, C01PacketUpdateBuilder.class, 0, Side.SERVER);
         wrapper.registerMessage(C02HandlerCraftChest.class, C02PacketCraftChest.class, 1, Side.SERVER);
-        wrapper.registerMessage(C03HandlerUpdateConfig.class, C03PacketUpdateConfig.class, 2, Side.CLIENT);
+        wrapper.registerMessage(S03HandlerUpdateConfig.class, S03PacketUpdateConfig.class, 2, Side.CLIENT);
 
         ConfigurationHandler.configFile = event.getSuggestedConfigurationFile();
 

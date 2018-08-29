@@ -2,7 +2,7 @@ package com.tattyseal.compactstorage;
 
 import com.google.common.collect.Lists;
 import com.tattyseal.compactstorage.ConfigurationState;
-import com.tattyseal.compactstorage.network.packet.C03PacketUpdateConfig;
+import com.tattyseal.compactstorage.network.packet.S03PacketUpdateConfig;
 import com.tattyseal.compactstorage.exception.InvalidConfigurationException;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -154,7 +154,7 @@ public class ConfigurationHandler
         {
             // Update these config's only if running an integrated server.
             updateConfig(configForServer);
-            CompactStorage.instance.wrapper.sendToAll(new C03PacketUpdateConfig(configForServer));
+            CompactStorage.instance.wrapper.sendToAll(new S03PacketUpdateConfig(configForServer));
         }
     }
 
