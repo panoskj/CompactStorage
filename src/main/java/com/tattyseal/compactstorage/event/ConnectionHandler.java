@@ -2,7 +2,7 @@ package com.tattyseal.compactstorage.event;
 
 import com.tattyseal.compactstorage.CompactStorage;
 import com.tattyseal.compactstorage.ConfigurationHandler;
-import com.tattyseal.compactstorage.network.packet.C03PacketUpdateConfig;
+import com.tattyseal.compactstorage.network.packet.S03PacketUpdateConfig;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -28,6 +28,6 @@ public class ConnectionHandler
         }
 
         if(e.player instanceof EntityPlayerMP)
-            CompactStorage.instance.wrapper.sendTo(new C03PacketUpdateConfig(ConfigurationHandler.configForServer), (EntityPlayerMP)e.player);
+            CompactStorage.instance.wrapper.sendTo(new S03PacketUpdateConfig(ConfigurationHandler.configForServer), (EntityPlayerMP)e.player);
     }
 }

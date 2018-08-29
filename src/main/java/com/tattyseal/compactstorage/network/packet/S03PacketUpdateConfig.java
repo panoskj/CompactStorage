@@ -4,14 +4,14 @@ import com.tattyseal.compactstorage.ConfigurationState;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class C03PacketUpdateConfig implements IMessage
+public class S03PacketUpdateConfig implements IMessage
 {
-	public C03PacketUpdateConfig()
+	public S03PacketUpdateConfig()
 	{
 		this(null);
 	}
 
-	public C03PacketUpdateConfig(ConfigurationState config)
+	public S03PacketUpdateConfig(ConfigurationState config)
 	{
 		this.config = config;
 	}

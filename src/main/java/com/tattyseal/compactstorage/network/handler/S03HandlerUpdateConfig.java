@@ -1,6 +1,6 @@
 package com.tattyseal.compactstorage.network.handler;
 
-import com.tattyseal.compactstorage.network.packet.C03PacketUpdateConfig;
+import com.tattyseal.compactstorage.network.packet.S03PacketUpdateConfig;
 
 import com.tattyseal.compactstorage.ConfigurationHandler;
 
@@ -11,10 +11,10 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import net.minecraft.client.Minecraft;
 
-public class C03HandlerUpdateConfig implements IMessageHandler<C03PacketUpdateConfig, IMessage>
+public class S03HandlerUpdateConfig implements IMessageHandler<S03PacketUpdateConfig, IMessage>
 {
 	@Override
-	public IMessage onMessage(final C03PacketUpdateConfig message, MessageContext ctx)
+	public IMessage onMessage(final S03PacketUpdateConfig message, MessageContext ctx)
 	{
 		if(!ctx.side.equals(Side.CLIENT))
 			return null;
