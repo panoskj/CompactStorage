@@ -6,7 +6,9 @@ import com.tattyseal.compactstorage.block.BlockChest;
 import com.tattyseal.compactstorage.util.StorageInfo;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
@@ -16,22 +18,24 @@ import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityLockableLoot;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
 import java.awt.Color;
 
 /**
  * Created by Toby on 06/11/2014.
  */
-public class TileEntityChest extends TileEntity implements IInventory, IChest, ITickable
+public class TileEntityChest extends TileEntityLockableLoot implements IInventory, IChest, ITickable
 {
     public EnumFacing direction;
 
@@ -519,5 +523,28 @@ public class TileEntityChest extends TileEntity implements IInventory, IChest, I
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate)
     {
         return oldState.getBlock() != newSate.getBlock();
+    }
+
+    
+    
+    @Override
+    public NonNullList<ItemStack> getItems()
+    {
+        // .from(defaultValue, values)
+        return NonNullList.from(ItemStack.EMPTY, items);
+    }
+    
+    @Override
+    public String getGuiID()
+    {
+        return "compactstorage:chest";
+    }
+    
+    @Override
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+    {
+        this.fillWithLoot(playerIn);
+
+        return new com.tattyseal.compactstorage.inventory.ContainerChest(playerIn.world, this, playerIn);
     }
 }
