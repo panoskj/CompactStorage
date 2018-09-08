@@ -24,7 +24,7 @@ public class ContainerChest extends Container
 {
     public World world;
     public EntityPlayer player;
-    public BlockPos pos;
+    //public BlockPos pos;
 
     public IChest chest;
     
@@ -42,11 +42,16 @@ public class ContainerChest extends Container
     
     public ContainerChest(World world, IChest chest, EntityPlayer player, BlockPos pos)
     {
+        this(world, chest, player);
+    }
+    
+    public ContainerChest(World world, IChest chest, EntityPlayer player)
+    {
         super();
 
         this.world = world;
         this.player = player;
-        this.pos = pos;
+        //this.pos = pos;
         this.chest = chest;
 
         chest.openInventory(player);
@@ -185,7 +190,7 @@ public class ContainerChest extends Container
 
             if(!isChest)
             {
-                world.playSound(null, pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, SoundEvents.BLOCK_CLOTH_STEP, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+                world.playSound(null, player.posX + 0.5d, player.posY + 0.5d, player.posZ + 0.5d, SoundEvents.BLOCK_CLOTH_STEP, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
             }
         }
 
