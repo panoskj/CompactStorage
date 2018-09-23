@@ -28,6 +28,13 @@ public class InventoryBackpack implements IChest
 
     private String customName;
 
+    public static boolean inUse(ItemStack stack)
+    {
+        return stack.hasTagCompound() &&
+            stack.getTagCompound().hasKey("using") &&
+            stack.getTagCompound().getBoolean("using");
+    }
+    
     public InventoryBackpack(ItemStack stack)
     {
         this.stack = stack;
@@ -44,6 +51,8 @@ public class InventoryBackpack implements IChest
             stack.setTagCompound(new NBTTagCompound());
             stack.getTagCompound().setIntArray("size", new int[] {9, 3});
         }
+        
+        stack.getTagCompound().setBoolean("using", true);
 
         items = new ItemStack[getSizeInventory()];
 
@@ -195,6 +204,7 @@ public class InventoryBackpack implements IChest
     @Override
     public void closeInventory(@Nonnull EntityPlayer player) {
         writeToNBT(stack.getTagCompound());
+        stack.getTagCompound().setBoolean("using", false);
     }
 
     @Override
