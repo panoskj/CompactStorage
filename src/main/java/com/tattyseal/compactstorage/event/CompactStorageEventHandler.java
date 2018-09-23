@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.item.ItemStack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -44,9 +45,11 @@ public class CompactStorageEventHandler
 	{
 		EntityPlayer player = event.getEntityPlayer();
 		
-		if (player.getHeldItem(EnumHand.MAIN_HAND).getItem().equals(CompactStorage.ModItems.backpack))
+		ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
+		
+		if (heldItem.getItem().equals(CompactStorage.ModItems.backpack) && !InventoryBackpack.inUse(heldItem))
 		{
-			InventoryBackpack inventory = new InventoryBackpack(player.getHeldItem(EnumHand.MAIN_HAND));
+			InventoryBackpack inventory = new InventoryBackpack(heldItem);
 			
 			ContainerChest container = new ContainerChest(player.world, inventory, player, new BlockPos(player.posX, player.posY, player.posZ));
 			
